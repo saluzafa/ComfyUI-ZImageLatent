@@ -38,8 +38,8 @@ class ZImageLatent:
             "batch_size": ("INT", {"default": 1, "min": 1, "max": 64}),
         }}
 
-    RETURN_NAMES = ("Latent", "Width", "Height")
-    RETURN_TYPES = ("LATENT", "INT", "INT")
+    RETURN_NAMES = ("Latent", "Width", "Height", "batch_size")
+    RETURN_TYPES = ("LATENT", "INT", "INT", "INT")
     FUNCTION = "generate"
     CATEGORY = "Utilities"
 
@@ -58,7 +58,7 @@ class ZImageLatent:
 
         latent = torch.zeros([batch_size, 4, height // 8, width // 8], device=self.device)
 
-        return ({"samples": latent}, width, height)
+        return ({"samples": latent}, width, height, batch_size)
 
 NODE_CLASS_MAPPINGS = {
     "ZImageLatent": ZImageLatent,
