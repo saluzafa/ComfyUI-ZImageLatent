@@ -34,7 +34,6 @@ class ZImageLatent:
 
         return {"required": {
             "resolution": (resolution_list, ),
-            "portrait": ("BOOL", {"default": False}),
             "batch_size": ("INT", {"default": 1, "min": 1, "max": 64}),
         }}
 
@@ -43,15 +42,9 @@ class ZImageLatent:
     FUNCTION = "generate"
     CATEGORY = "Utilities"
 
-    def generate(self, resolution, portrait, batch_size=1):
+    def generate(self, resolution, batch_size=1):
         dimensions = resolution.split(' ')[0]
-        width = None
-        height = None
-
-        if portrait is True:
-            height, width = map(int, dimensions.split('x'))
-        else:
-            width, height = map(int, dimensions.split('x'))
+        width, height = map(int, dimensions.split('x'))
 
         width = int((width // 16) * 16)
         height = int((height // 16) * 16)
